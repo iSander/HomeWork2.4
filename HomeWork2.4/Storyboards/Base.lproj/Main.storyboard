@@ -24,7 +24,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h2E-Yv-PuR">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="next" textContentType="username"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="SdT-0U-Lth"/>
                                                 </connections>
@@ -32,7 +32,7 @@
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nhy-tV-Ecn">
                                                 <rect key="frame" x="0.0" y="44" width="260" height="34"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done" secureTextEntry="YES" textContentType="password"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="BYZ-38-t0r" id="fIh-dP-rkT"/>
                                                 </connections>
@@ -41,7 +41,7 @@
                                                 <rect key="frame" x="0.0" y="88" width="260" height="30"/>
                                                 <state key="normal" title="Log In"/>
                                                 <connections>
-                                                    <segue destination="PP3-bJ-1m9" kind="presentation" modalPresentationStyle="fullScreen" id="3Eo-zf-UD6"/>
+                                                    <action selector="loginAction" destination="BYZ-38-t0r" eventType="touchUpInside" id="cIG-B3-TIB"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -79,11 +79,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="forgotPasswordButton" destination="2yc-Uk-wlp" id="EdV-1y-5vE"/>
-                        <outlet property="forgotUsernameButton" destination="f8d-wF-xgn" id="Kmn-oo-C6o"/>
-                        <outlet property="logInButton" destination="rbI-C6-lCZ" id="ZfQ-HW-bMp"/>
                         <outlet property="passwordTextField" destination="Nhy-tV-Ecn" id="1sD-jG-Naa"/>
                         <outlet property="usernameTextField" destination="h2E-Yv-PuR" id="mXX-SU-4vT"/>
+                        <segue destination="PP3-bJ-1m9" kind="presentation" identifier="logIn" modalPresentationStyle="fullScreen" id="eo1-Yu-4R2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -99,7 +97,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v6t-pa-AnW">
-                                <rect key="frame" x="20" y="180" width="280" height="208"/>
+                                <rect key="frame" x="16" y="16" width="288" height="487"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <string key="text">Over 3 years of experience in iOS games and applications development I have successfully developed and released more than 10 projects, created as a part of a team and solo. Some of them are still under development.
 I enjoy challenging tasks, that is why it was a great experience for me to learn something new and use absolutely different technologies to complete a project or to be useful and helpful for a company as much as I can.</string>
@@ -110,10 +108,10 @@ I enjoy challenging tasks, that is why it was a great experience for me to learn
                         </subviews>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="v6t-pa-AnW" firstAttribute="centerY" secondItem="rtd-2v-bP9" secondAttribute="centerY" id="Uqw-MQ-bYZ"/>
-                            <constraint firstItem="v6t-pa-AnW" firstAttribute="leading" secondItem="2fa-Cv-Qu9" secondAttribute="leading" constant="20" id="Xy4-rj-3L8"/>
-                            <constraint firstItem="2fa-Cv-Qu9" firstAttribute="trailing" secondItem="v6t-pa-AnW" secondAttribute="trailing" constant="20" id="YIx-g3-Tjn"/>
-                            <constraint firstItem="v6t-pa-AnW" firstAttribute="height" secondItem="2fa-Cv-Qu9" secondAttribute="height" multiplier="0.4" id="fKo-5y-DJN"/>
+                            <constraint firstItem="v6t-pa-AnW" firstAttribute="top" secondItem="2fa-Cv-Qu9" secondAttribute="top" constant="16" id="WnK-Vz-uwJ"/>
+                            <constraint firstItem="v6t-pa-AnW" firstAttribute="leading" secondItem="2fa-Cv-Qu9" secondAttribute="leading" constant="16" id="Xy4-rj-3L8"/>
+                            <constraint firstItem="2fa-Cv-Qu9" firstAttribute="bottom" secondItem="v6t-pa-AnW" secondAttribute="bottom" constant="16" id="Y50-Sd-shD"/>
+                            <constraint firstItem="2fa-Cv-Qu9" firstAttribute="trailing" secondItem="v6t-pa-AnW" secondAttribute="trailing" constant="16" id="YIx-g3-Tjn"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2fa-Cv-Qu9"/>
                     </view>
@@ -223,7 +221,7 @@ I enjoy challenging tasks, that is why it was a great experience for me to learn
                                         <rect key="frame" x="0.0" y="46.5" width="260" height="30"/>
                                         <state key="normal" title="Log out"/>
                                         <connections>
-                                            <action selector="logoutAction" destination="lJH-Kx-ctF" eventType="touchUpInside" id="8yX-Vp-db8"/>
+                                            <segue destination="bld-07-oVv" kind="unwind" unwindAction="unwindSegueWithSegue:" id="fkc-AA-x4I"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -243,6 +241,7 @@ I enjoy challenging tasks, that is why it was a great experience for me to learn
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xf2-bG-P6L" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="bld-07-oVv" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1800" y="-577"/>
         </scene>

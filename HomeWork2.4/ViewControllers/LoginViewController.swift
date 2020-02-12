@@ -15,24 +15,9 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    @IBOutlet weak var logInButton: UIButton!
-    @IBOutlet weak var forgotUsernameButton: UIButton!
-    @IBOutlet weak var forgotPasswordButton: UIButton!
-    
     // MARK: - IB Actions
 
-    @IBAction func forgotUsernameAction() {
-        showAlert(with: "Hint", message: "Username: \(User.defaultUser().username)")
-    }
-    
-    @IBAction func forgotPasswordAction() {
-        showAlert(with: "Hint", message: "Password: \(User.defaultUser().password)")
-    }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+    @IBAction func loginAction() {
         guard let usernameText = usernameTextField.text,
             let passwordText = passwordTextField.text,
             !usernameText.isEmpty && !passwordText.isEmpty else {
@@ -46,10 +31,26 @@ class LoginViewController: UIViewController {
             return
         }
         
+        performSegue(withIdentifier: "logIn", sender: nil)
+    }
+    
+    @IBAction func forgotUsernameAction() {
+        showAlert(with: "Hint", message: "Username: \(User.defaultUser().username)")
+    }
+    
+    @IBAction func forgotPasswordAction() {
+        showAlert(with: "Hint", message: "Password: \(User.defaultUser().password)")
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let tabBarController = segue.destination as! UITabBarController
         let destinationVC = tabBarController.viewControllers?.first as! HomeViewController
         destinationVC.username = usernameTextField.text
-        
+    }
+    
+    @IBAction func unwindSegue(segue: UIStoryboardSegue) {
         usernameTextField.text = nil
         passwordTextField.text = nil
     }
@@ -63,5 +64,24 @@ extension LoginViewController {
         let okAction = UIAlertAction(title: "OK", style: .default)
         alert.addAction(okAction)
         present(alert, animated: true)
+    }
+}
+
+// MARK: Text Field Delegate
+extension LoginViewController: UITextFieldDelegate {
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super .touchesBegan(touches, with: event)
+        view.endEditing(true)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == usernameTextField {
+            textField.resignFirstResponder()
+            passwordTextField.becomeFirstResponder()
+        } else {
+            loginAction()
+        }
+        return true
     }
 }

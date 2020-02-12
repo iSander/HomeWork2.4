@@ -25,10 +25,4 @@ class HomeViewController: UIViewController {
 
         welcomeLabel.text = "Welcome, \(username ?? "user")!"
     }
-    
-    // MARK: - IB Actions
-    
-    @IBAction func logoutAction() {
-        dismiss(animated: true)
-    }
 }
